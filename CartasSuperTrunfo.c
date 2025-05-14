@@ -1,8 +1,8 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
-// Desafio Super Trunfo com Menu Interativo, Comparação e Super Poder
-
-// Função para exibir o menu e retornar a escolha
+//exibir o menu e retornar a escolha
 int exibirMenu() {
     int opcao;
     printf("\n--- Menu de Comparação ---\n");
@@ -18,6 +18,8 @@ int exibirMenu() {
 }
 
 int main() {
+    srand(time(0));
+
     char codigo1[5], codigo2[5];
     unsigned long int populacao1, populacao2;
     float area1, area2, pib1, pib2, densidade1, densidade2, superPoder1, superPoder2;
@@ -57,13 +59,22 @@ int main() {
     superPoder1 = (float)populacao1 + area1 + pib1 + turisticos1 + (densidade1 != 0 ? (1 / densidade1) : 0);
     superPoder2 = (float)populacao2 + area2 + pib2 + turisticos2 + (densidade2 != 0 ? (1 / densidade2) : 0);
 
-    // Exibindo o menu
-    int escolha = exibirMenu();
+    // Escolha de dois atributos
+    int escolha1 = exibirMenu();
+    int escolha2 = exibirMenu();
 
+    if (escolha1 == escolha2) {
+        printf("Os atributos devem ser diferentes!\n");
+        return 1;
+    }
+
+    // Exibição e soma dos atributos
     printf("\n--- Comparação de Cartas ---\n");
     printf("Carta 1: %s | Carta 2: %s\n", codigo1, codigo2);
+    printf("Atributos escolhidos: %d e %d\n", escolha1, escolha2);
 
-    switch (escolha) {
+    //ultimo ato
+    switch (escolha1) {
         case 1:
             printf("População: %lu vs %lu\n", populacao1, populacao2);
             printf(populacao1 > populacao2 ? "Carta 1 venceu!\n" : (populacao2 > populacao1 ? "Carta 2 venceu!\n" : "Empate!\n"));
